@@ -1,14 +1,21 @@
-const text = document.getElementById("text");
-const delay = document.getElementById("delay");
-const btn = document.getElementById("btn");
-const output = document.getElementById("output");
+  // Function to delay execution
+      const delayExecution = (delay) =>
+        new Promise((resolve) => setTimeout(resolve, delay * 1000));
 
-//your code here
-async function showMessage() {
-  const message = text.value;
-  const delayVal = delay.value;
-  await new Promise((resolve) => setTimeout(resolve, delayVal));
-  output.innerText = message;
-}
+      // Function to display message after delay
+      const displayMessage = async () => {
+        const textInput = document.getElementById('text').value;
+        const delayInput = document.getElementById('delay').value;
 
-btn.addEventListener("click", showMessage);
+        if (textInput && delayInput) {
+          const outputDiv = document.getElementById('output');
+          outputDiv.textContent = 'Waiting...';
+
+          await delayExecution(delayInput);
+          outputDiv.textContent = textInput;
+        }
+      };
+
+      // Attach click event listener to the button
+      const btn = document.getElementById('btn');
+      btn.addEventListener('click', displayMessage);
